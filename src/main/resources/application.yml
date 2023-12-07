@@ -1,0 +1,22 @@
+spring.datasource:
+  driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  url: jdbc:log4jdbc:postgresql://localhost:5432/postgres
+  hikari:
+    username: postgres
+    password: code416!@
+    minimum-idle: 1
+    maximum-pool-size: 5
+    idle-timeout: 100000
+
+spring.batch:
+    job:
+      # true, false (서버 시작시 바로 job 실행 여부)
+      enabled: true
+#      names: ${job.name:NONE}
+    jdbc:
+      # always, never, embedded, embedded-drop-create (always: 서버 시작시 sql 실행, never: 실행 안함, embedded: 메모리 db 사용, embedded-drop-create: 메모리 db 사용하고 서버 종료시 db 삭제)
+      initialize-schema: never
+      #      table-prefix: SYSTEM_
+
+logging:
+  config: classpath:logback-spring-local.xml

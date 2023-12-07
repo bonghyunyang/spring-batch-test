@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+  <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } --- [%t] %-40.40logger{39} : %m%n%wex"/>
+  <logger name="org.springframework" level="INFO"/>
+  <logger name="org.springframework.transaction" level="DEBUG" />
+  <logger name="org.apache" level="INFO"/>
+
+  <logger name="org.hibernate" level="WARN"/>
+  <logger name="org.hibernate.SQL" level="DEBUG"/>
+  <logger name="org.hibernate.type" level="INFO"/>
+  <logger name="com.ulisesbocchio.jasyptspringboot" level="INFO"/>
+  <logger name="com.zaxxer.hikari.pool.HikariPool" level="INFO"/>
+  <logger name="com.zaxxer.hikari.pool.PoolBase" level="INFO"/>
+
+  <root level="DEBUG">
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>
