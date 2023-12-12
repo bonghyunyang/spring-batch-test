@@ -1,22 +1,41 @@
-spring.datasource:
-  driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-  url: jdbc:log4jdbc:postgresql://localhost:5432/postgres
-  hikari:
-    username: postgres
-    password: code416!@
-    minimum-idle: 1
-    maximum-pool-size: 5
-    idle-timeout: 100000
-
-spring.batch:
+spring:
+  #DB
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:postgresql://localhost:5432/postgres
+    hikari:
+      username: postgres
+      password:
+      minimum-idle: 1
+      maximum-pool-size: 5
+      idle-timeout: 100000
+  #Batch
+  batch:
     job:
+      names: ${job.name:NONE}
       # true, false (서버 시작시 바로 job 실행 여부)
       enabled: true
-#      names: ${job.name:NONE}
     jdbc:
-      # always, never, embedded, embedded-drop-create (always: 서버 시작시 sql 실행, never: 실행 안함, embedded: 메모리 db 사용, embedded-drop-create: 메모리 db 사용하고 서버 종료시 db 삭제)
+      # always, never, embedded, embedded-drop-create
+      # (always: 서버 시작시 sql 실행, never: 실행 안함, embedded: 메모리 db 사용, embedded-drop-create: 메모리 db 사용하고 서버 종료시 db 삭제)
       initialize-schema: never
-      #      table-prefix: SYSTEM_
-
-logging:
-  config: classpath:logback-spring-local.xml
+      # table-prefix: SYSTEM_
+  #JPA
+  jpa:
+    hibernate:
+      ddl-auto: create  # option type: create, create-drop, update, validate, none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true  # sql 쿼리를 보여줍니다.
+        format_sql: true  # sql query formatting
+        use_sql_comments: true  # sql 쿼리의 추가정보를 보여줍니다.
+  #LOGGING
+  logging:
+    config: classpath:logback-spring-local.xml
+    level:
+      org:
+        hibernate:
+          type:
+            descriptor:
+              sql: trace
